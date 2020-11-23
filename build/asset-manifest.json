@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/GA-02/Grechka.git/static/css/main.ae880ad0.chunk.css",
+    "main.js": "/GA-02/Grechka.git/static/js/main.8883f8a9.chunk.js",
+    "main.js.map": "/GA-02/Grechka.git/static/js/main.8883f8a9.chunk.js.map",
+    "runtime-main.js": "/GA-02/Grechka.git/static/js/runtime-main.a29b11ef.js",
+    "runtime-main.js.map": "/GA-02/Grechka.git/static/js/runtime-main.a29b11ef.js.map",
+    "static/css/2.86df01db.chunk.css": "/GA-02/Grechka.git/static/css/2.86df01db.chunk.css",
+    "static/js/2.54e36cb5.chunk.js": "/GA-02/Grechka.git/static/js/2.54e36cb5.chunk.js",
+    "static/js/2.54e36cb5.chunk.js.map": "/GA-02/Grechka.git/static/js/2.54e36cb5.chunk.js.map",
+    "index.html": "/GA-02/Grechka.git/index.html",
+    "precache-manifest.b66f329e906aa8b2905088ffbb973cf7.js": "/GA-02/Grechka.git/precache-manifest.b66f329e906aa8b2905088ffbb973cf7.js",
+    "service-worker.js": "/GA-02/Grechka.git/service-worker.js",
+    "static/css/2.86df01db.chunk.css.map": "/GA-02/Grechka.git/static/css/2.86df01db.chunk.css.map",
+    "static/css/main.ae880ad0.chunk.css.map": "/GA-02/Grechka.git/static/css/main.ae880ad0.chunk.css.map",
+    "static/js/2.54e36cb5.chunk.js.LICENSE.txt": "/GA-02/Grechka.git/static/js/2.54e36cb5.chunk.js.LICENSE.txt",
+    "static/media/roll.svg": "/GA-02/Grechka.git/static/media/roll.b528eaf8.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a29b11ef.js",
+    "static/css/2.86df01db.chunk.css",
+    "static/js/2.54e36cb5.chunk.js",
+    "static/css/main.ae880ad0.chunk.css",
+    "static/js/main.8883f8a9.chunk.js"
+  ]
+}
