@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c8cf90d9dece198e1349415133b8478d",
+    "revision": "62621477f69c6abbea95058f1b7f8f05",
     "url": "./index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/css/2.86df01db.chunk.css"
   },
   {
-    "revision": "af01111d40908c5363bc",
-    "url": "./static/css/main.85c96ccb.chunk.css"
+    "revision": "dc59d1139bb69d198aaf",
+    "url": "./static/css/main.842c014a.chunk.css"
   },
   {
     "revision": "90ce5fef90930d0d3feb",
@@ -20,15 +20,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/js/2.54e36cb5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "af01111d40908c5363bc",
-    "url": "./static/js/main.8883f8a9.chunk.js"
+    "revision": "dc59d1139bb69d198aaf",
+    "url": "./static/js/main.bc890e92.chunk.js"
   },
   {
     "revision": "4e6ddaa2f078aa8f4f73",
     "url": "./static/js/runtime-main.c44f15e4.js"
   },
   {
-    "revision": "b528eaf852da05eb9fbb826b13d854d5",
-    "url": "./static/media/roll.b528eaf8.svg"
+    "revision": "5babe4318ff70170ebb07f56447f199f",
+    "url": "./static/media/bistro-and-restaurant_16-512.5babe431.png"
   }
 ]);
