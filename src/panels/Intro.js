@@ -24,7 +24,7 @@ const Intro = ({ id, go, route, fetchedUser, userHasSeenIntro }) => (
 				<FixedLayout vertical='bottom'>
 					<Div>
 						<Button mode='commerce' size="xl" level="2" onClick={() => go(route)}>
-							ОК, всё понятно
+							Всё понятно
 						</Button>
 					</Div>
 				</FixedLayout>

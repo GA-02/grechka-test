@@ -11,14 +11,17 @@ import Counter from '@vkontakte/vkui/dist/components/Counter/Counter';
 import Snackbar from '@vkontakte/vkui/dist/components/Snackbar/Snackbar';
 import Icon28DocumentOutline from '@vkontakte/icons/dist/28/document_outline';
 import bridge from '@vkontakte/vk-bridge';
-import roll from '../img/roll.svg';
+import roll from '../img/bistro-and-restaurant_16-512.png';
+import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
+import PanelHeaderButton from '@vkontakte/vkui/dist/components/PanelHeaderButton/PanelHeaderButton';
+import Icon28ShareOutline from '@vkontakte/icons/dist/28/share_outline';
 
-const SHEETS_PER_ROLL 		= 10;
-const SHEETS_PER_VISIT 		= 1;
-const DEFAULT_ROLLS_COUNT 	= 4;
+const SHEETS_PER_ROLL = 10;
+const SHEETS_PER_VISIT = 1;
+const DEFAULT_ROLLS_COUNT = 4;
 const DEFAULT_TOILET_VISITS = 3;
 const DEFAULT_PERSONS_COUNT = 2;
-const IS_TAPTIC_SUPPORTED	= bridge.supports('VKWebAppTapticNotificationOccurred');
+const IS_TAPTIC_SUPPORTED = bridge.supports('VKWebAppTapticNotificationOccurred');
 
 function throttle(callback, delay) {
 	let isThrottled = false, args, context;
@@ -32,7 +35,7 @@ function throttle(callback, delay) {
 
 		isThrottled = true;
 		callback.apply(this, arguments);
-		
+
 		setTimeout(() => {
 			isThrottled = false;
 			if (args) {
@@ -59,7 +62,7 @@ const Home = ({ fetchedState, snackbarError }) => {
 			setSnackbar(<Snackbar
 				layout='vertical'
 				onClose={() => setSnackbar(null)}
-				before={<Avatar size={24} style={{backgroundColor: 'var(--accent)'}}><Icon28DocumentOutline fill='#fff' width={14} height={14} /></Avatar>}
+				before={<Avatar size={24} style={{ backgroundColor: 'var(--accent)' }}><Icon28DocumentOutline fill='#fff' width={14} height={14} /></Avatar>}
 				duration={900}
 			>
 				У вас не осталось гречки
@@ -77,7 +80,7 @@ const Home = ({ fetchedState, snackbarError }) => {
 		setSnackbar(<Snackbar
 			layout='vertical'
 			onClose={() => setSnackbar(null)}
-			before={<Avatar size={24} style={{backgroundColor: 'var(--accent)'}}><Icon28DocumentOutline fill='#fff' width={14} height={14} /></Avatar>}
+			before={<Avatar size={24} style={{ backgroundColor: 'var(--accent)' }}><Icon28DocumentOutline fill='#fff' width={14} height={14} /></Avatar>}
 			duration={900}
 		>
 			{newSheetsCount <= 0 ? 'У вас не осталось гречки' : `100 грамм гречки потрачено, осталось ${newSheetsCount} приемов пищи`}
@@ -87,7 +90,32 @@ const Home = ({ fetchedState, snackbarError }) => {
 		});
 	}
 
-	const setStorage = async function(properties) {
+	const showWallPost = async function ({ id }) {
+		let a;
+		if (countDays() < 15 && countDays() > 10) {
+			a = 'дней';
+		} else {
+			switch (countDays() % 10) {
+				case 1: a = 'день'; break;
+				case 2:
+				case 3:
+				case 4: a = 'дня'; break;
+				case 5:
+				case 6:
+				case 7:
+				case 8:
+				case 9:
+				case 0: a = 'дней'; break;
+				default: break;
+
+			}
+		}
+
+		await bridge.send("VKWebAppShowWallPostBox", { "message": `Благодаря гречневой крупе, я смогу продержаться ${countDays()} ${a} во время ужасной пандемии, узнай свой результат в приложении "Гречка — выжить любой ценой" `, "attachments": "photo{id},https://vk.com/app7672316" });
+
+	}
+
+	const setStorage = async function (properties) {
 		await bridge.send('VKWebAppStorageSet', {
 			key: 'state',
 			value: JSON.stringify({
@@ -100,7 +128,7 @@ const Home = ({ fetchedState, snackbarError }) => {
 		});
 	}
 
-	const countDays = function() {
+	const countDays = function () {
 		const sheetsPerDay = SHEETS_PER_VISIT * toiletVisits * personsCount;
 		const totalSheets = rollsCount * SHEETS_PER_ROLL
 		return Math.round(totalSheets / sheetsPerDay);
@@ -126,54 +154,69 @@ const Home = ({ fetchedState, snackbarError }) => {
 	}, 200);
 
 	return (
+
 		<Fragment>
+			<PanelHeader left={
+				<React.Fragment>
+					<PanelHeaderButton onClick={showWallPost}><Icon28ShareOutline /></PanelHeaderButton>
+				</React.Fragment>
+			}
+				right={
+					<React.Fragment>
+						<PanelHeaderButton><Icon28DocumentOutline /></PanelHeaderButton>
+					</React.Fragment>
+				}
+
+
+			>Гречка</PanelHeader>
+
 			<Group>
 				<h1 className='DaysLeftHeading'>{countDays()}</h1>
 				<h3 className='DaysLeftSubheading'>Столько дней вы продержитесь</h3>
 			</Group>
 			<FormLayout>
-					<Slider
-						step={1}
-						min={0}
-						max={100}
-						value={rollsCount}
-						top={
-							<Header indicator={<Counter size='m' mode='primary'>{rollsCount}</Counter>}>
-								<span role='img' aria-label='Toilet paper'>🥡</span> Количество пачек
+				<Slider
+					step={1}
+					min={0}
+					max={100}
+					value={rollsCount}
+					top={
+						<Header indicator={<Counter size='m' mode='primary'>{rollsCount}</Counter>}>
+							<span role='img' aria-label='Toilet paper'>🥡</span> Количество пачек
 							</Header>
-						}
-						onChange={(rolls) => onRollsChange(rolls)}
-					/>
-					<Slider
-						step={1}
-						min={1}
-						max={8}
-						value={toiletVisits}
-						top={
-							<Header indicator={<Counter size='m' mode='primary'>{toiletVisits}</Counter>}>
-								<span role='img' aria-label='Poo'>🥣</span> Приемов пищи в день
+					}
+					onChange={(rolls) => onRollsChange(rolls)}
+				/>
+				<Slider
+					step={1}
+					min={1}
+					max={8}
+					value={toiletVisits}
+					top={
+						<Header indicator={<Counter size='m' mode='primary'>{toiletVisits}</Counter>}>
+							<span role='img' aria-label='Poo'>🥣</span> Приемов пищи в день
 							</Header>
-						}
-						onChange={visits => onVisitsChange(visits)}
-					/>
-					<Slider
-						step={1}
-						min={1}
-						max={16}
-						value={personsCount}
-						top={
-							<Header indicator={<Counter size='m' mode='primary'>{personsCount}</Counter>}>
-								<span role='img' aria-label='People in household'>👨‍👩‍👧‍👦</span> Людей дома
+					}
+					onChange={visits => onVisitsChange(visits)}
+				/>
+				<Slider
+					step={1}
+					min={1}
+					max={16}
+					value={personsCount}
+					top={
+						<Header indicator={<Counter size='m' mode='primary'>{personsCount}</Counter>}>
+							<span role='img' aria-label='People in household'>👨‍👩‍👧‍👦</span> Людей дома
 							</Header>
-						}
-						onChange={persons => onPersonsChange(persons)}
-					/>
+					}
+					onChange={persons => onPersonsChange(persons)}
+				/>
 			</FormLayout>
 
 			<FixedLayout vertical="bottom">
 				<Div className='PooBtnContainer'>
-					<Button  className='PooBtn' size='xl' onClick={onSheet}>
-						<img src={roll} alt="Toilet paper roll"/>
+					<Button className='PooBtn' size='xl' onClick={onSheet}>
+						<img src={roll} alt="Toilet paper roll" />
 					</Button>
 				</Div>
 			</FixedLayout>
